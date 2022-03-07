@@ -14,7 +14,7 @@ module.exports = {
 
   devServer: {
     static: {
-      directory: path.join(__dirname, 'public'),
+      directory: path.join(__dirname, "public"),
     },
     port: 8080,
     headers: {
@@ -49,10 +49,18 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new ModuleFederationPlugin({
-      name: "starter",
+      name: "growlers",
       filename: "remoteEntry.js",
       remotes: {},
-      exposes: {},
+      exposes: {
+        "./VanillaCart": "./src/components/VanillaCart.js",
+        "./VanillaSearch": "./src/components/VanillaSearch.js",
+        "./VanillaTaps": "./src/components/VanillaTaps.js",
+        "./Cart": "./src/components/Cart.vue",
+        "./Search": "./src/components/Search.vue",
+        "./Taps": "./src/components/Taps.vue",
+        "./store": "./src/store.ts",
+      },
       shared: require("./package.json").dependencies,
     }),
     new HtmlWebPackPlugin({
